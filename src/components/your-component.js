@@ -13,12 +13,16 @@ class YourComponent extends React.Component {
     super(props);
     this.init = this.init.bind(this);
     this.mouseEventHandler = this.mouseEventHandler.bind(this);
-
+    this.DropdownHandler = this.DropdownHandler.bind(this);
+    this.LevelHandler = this.LevelHandler.bind(this);
 
     this.state = {
       isFirstClick : true,
       lastMouseX : 0,
       lastMouseY : 0,
+      polygons : 3,
+      level : 1,
+      colorArray: ['balck','blue','red','green']
     }
   }
 
@@ -41,7 +45,7 @@ class YourComponent extends React.Component {
           }else{
             let distantBetweenX = (x-thisComponent.state.lastMouseX)/3;
             let distantBetweenY = (y-thisComponent.state.lastMouseY)/3;
-            thisComponent.init(context,3,thisComponent.state.lastMouseX,thisComponent.state.lastMouseY,5,distantBetweenX,distantBetweenY)
+            thisComponent.init(context,thisComponent.state.level,thisComponent.state.lastMouseX,thisComponent.state.lastMouseY,parseInt(thisComponent.state.polygons)+1,distantBetweenX,distantBetweenY)
             thisComponent.setState({
               lastMouseX : x,
               lastMouseY : y
@@ -55,8 +59,6 @@ class YourComponent extends React.Component {
 {
 
     var degree = Math.PI / 180;
-
-    context.strokeStyle = 'black';
     snowflake(n, x, y, sideLength,sideLengthY);
     context.stroke();
 
@@ -110,34 +112,44 @@ class YourComponent extends React.Component {
     }
 }
 
+
+  DropdownHandler(e)
+{
+    this.setState({
+      polygons: e.target.value
+    })
+}
+  LevelHandler(e)
+{
+    this.setState({
+      level: e.target.value
+    })
+}
+
   render() {
     return (
       <div style={{padding:8,width:'40%'}}>
         <div class="container">
           <div class="row">
+            <label>Polygons:</label>
             <div class="col-sm">
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown button
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </div>
+                <select class="form-control" value={this.state.polygons} onChange={this.DropdownHandler}>
+                  <option class="dropdown-item" value="4">3</option>
+                  <option class="dropdown-item" value="5">4</option>
+                  <option class="dropdown-item" value="6">5</option>
+                </select>
             </div>
+            <label>level:</label>
             <div class="col-sm">
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown button
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </div>
+                <select class="form-control col-sm" value={this.state.level} onChange={this.LevelHandler}>
+                  <option class="dropdown-item" value="0">0</option>
+                  <option class="dropdown-item" value="1">1</option>
+                  <option class="dropdown-item" value="2">2</option>
+                  <option class="dropdown-item" value="3">3</option>
+                  <option class="dropdown-item" value="4">4</option>
+                  <option class="dropdown-item" value="5">5</option>
+                  <option class="dropdown-item" value="6">6</option>
+                </select>
             </div>
           </div>
         </div>
