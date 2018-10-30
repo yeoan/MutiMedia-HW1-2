@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {yourAction} from '../actions/yourActions.js';
+import { Link } from 'react-router-dom';
 
 class YourComponent extends React.Component {
 
@@ -151,6 +152,7 @@ class YourComponent extends React.Component {
                   <option class="dropdown-item" value="6">6</option>
                 </select>
             </div>
+            <Link to="/c2">go to Bezier Curve</Link>
           </div>
         </div>
         <canvas id="myCanvas" width="1200" height="700" style={{border:"1px solid #000000",marginTop:10}}>

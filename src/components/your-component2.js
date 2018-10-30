@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {yourAction} from '../actions/yourActions.js';
+import { Link } from 'react-router-dom';
 
 class YourComponent extends React.Component {
 
@@ -167,6 +168,7 @@ init();
     return (
       <div>
       <h1>Bezier Curve</h1>
+      <Link to="/">back to Fractal</Link>
         <div class="circle">
           <canvas id="myCanvasCircle" width="500" height="500" style={{border:"1px solid #000000",marginTop:10}}>your browser does not support HTML5 canvas tag.</canvas>
         </div>
