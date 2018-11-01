@@ -3,7 +3,7 @@
 var isFirstClick = true,
       lastMouseX = 0,
       lastMouseY = 0,
-      polygons = 3,
+      polygons = 4,
       level = 1;
 
 mouseEventHandler();
@@ -24,7 +24,7 @@ function mouseEventHandler()
         }else{
           let distantBetweenX = (x-lastMouseX)/3;
           let distantBetweenY = (y-lastMouseY)/3;
-          init(context,level,lastMouseX,lastMouseY,parseInt(polygons)+1,distantBetweenX,distantBetweenY)
+          init(context,level,lastMouseX,lastMouseY,polygons,distantBetweenX,distantBetweenY)
             lastMouseX = x;
             lastMouseY = y;
         }
@@ -94,12 +94,10 @@ function init(context,n,x,y,p,sideLength,sideLengthY)
 
 function DropdownHandler(event)
 {
-    document.getElementById("select1").value=event.target.value;
     polygons = event.target.value;
 }
 
 function LevelHandler(event)
 {
-document.getElementById("select2").value=event.target.value;
-level =event.target.value;
+  level = event.target.value;
 }
