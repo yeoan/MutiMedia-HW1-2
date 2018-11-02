@@ -4,7 +4,7 @@ var isFirstClick = true,
       lastMouseX = 0,
       lastMouseY = 0,
       polygons = 4,
-      level = 1;
+      level = 0;
 
 mouseEventHandler();
 
@@ -21,6 +21,12 @@ function mouseEventHandler()
             lastMouseX = x;
             lastMouseY = y;
             isFirstClick = false;
+        }else if(level==0){
+          let distantBetweenX = x-lastMouseX;
+          let distantBetweenY = y-lastMouseY;
+          init(context,level,lastMouseX,lastMouseY,polygons,distantBetweenX,distantBetweenY)
+            lastMouseX = x;
+            lastMouseY = y;
         }else{
           let distantBetweenX = (x-lastMouseX)/3;
           let distantBetweenY = (y-lastMouseY)/3;
@@ -43,23 +49,32 @@ function init(context,n,x,y,p,sideLength,sideLengthY)
 
   function snowflake(n, x, y, sideLength,sideLengthY)
   {
-      context.save();
-      context.translate(x, y);
-      context.moveTo(0, 0);
-      for(let x = p; x > 0 ; x--){
-        if(x==p){
-          leg(n - 1);
-          context.rotate((180 - 360/(p-1)) * degree);
-        }else if(x==2){
-          leg(n - 1);
-          context.rotate((180 - 360/(p-1)) * degree);
-        }else if(x==1){
-          leg(n - 1);
-        }else{
-          leg(n - 1);
-          context.rotate(-1 * 360/(p-1) * degree);
+
+      if(n==0){
+        context.save();
+        context.translate(x, y);
+        context.moveTo(0, 0);
+        context.lineTo(sideLength, sideLengthY);
+      }else{
+        context.save();
+        context.translate(x, y);
+        context.moveTo(0, 0);
+        for(let x = p; x > 0 ; x--){
+          if(x==p){
+            leg(n - 1);
+            context.rotate((180 - 360/(p-1)) * degree);
+          }else if(x==2){
+            leg(n - 1);
+            context.rotate((180 - 360/(p-1)) * degree);
+          }else if(x==1){
+            leg(n - 1);
+          }else{
+            leg(n - 1);
+            context.rotate(-1 * 360/(p-1) * degree);
+          }
         }
       }
+
       context.restore();
 
       function leg(n)
