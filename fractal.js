@@ -14,7 +14,7 @@ function mouseEventHandler()
       context = canvas.getContext('2d');
   canvas.addEventListener("mousedown", function (e) {
       context.strokeStyle = "black";
-      let x=e.pageX-8,y=e.pageY-60;
+      let x=e.pageX+2,y=e.pageY-40;
       context.fillRect(x,y,5,5);
       context.stroke();
         if(isFirstClick){
